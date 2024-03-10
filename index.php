@@ -4,23 +4,34 @@ include_once('./turn_left.php');
 
 //wczytanie współrzędnych punktów z pliku do tablicy
 $points = import_from_file('points.txt');
-$l=[];
-for($i=0;$i<=count($points)-1;$i++){
-    $l[]=$points[$i];
-    $l_count=count($l);
-    if($l_count>2){
-        while($l_count>2&&check_if_turn_left($l[$l_count-3],$l[$l_count-2],$l[$l_count-1])){
-            array_splice($l, $l_count-2, 1);
-            $l_count=count($l);
-        }
+
+//wyliczenie punktów w prawo
+for($i=0;$i<=count($points)-1;$i++) {
+    //dodanie punktu do tablicy lg
+    $lg[] = $points[$i];
+    //obliczenie wielkości tablicy
+    $l_count = count($lg);
+    //usuwanie środkowego elementu jeżeli są conajmniej 3 elementy oraz jest skręt w lewo
+    while ($l_count > 2 && check_if_turn_left($lg[$l_count - 3], $lg[$l_count - 2], $lg[$l_count - 1])) {
+        array_splice($lg, $l_count - 2, 1);
+        $l_count = count($lg);
     }
 }
 
-//$p=[-6,3];
-//$q=[-5,1];
-//$r=[-3,5];
-//check_if_turn_left($p,$q,$r);
+//wyliczenie punktów w lewo
+for($i=count($points)-1;$i>=0;$i--){
+    //dodanie punktu do tablicy lg
+    $ld[]=$points[$i];
+    //obliczenie wielkości tablicy
+    $l_count=count($ld);
+    //usuwanie środkowego elementu jeżeli są conajmniej 3 elementy oraz jest skręt w lewo
+    while($l_count>2&&check_if_turn_left($ld[$l_count-3],$ld[$l_count-2],$ld[$l_count-1])){
+        array_splice($ld, $l_count-2, 1);
+        $l_count=count($ld);
+    }
 
-
-print_r($l);
-//print_r($points);
+}
+//suma 2 tablic
+$result = $lg+$ld;
+//wypisanie wyniku
+print_r($result);

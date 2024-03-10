@@ -2,14 +2,11 @@
 include_once('./matrix_calc.php');
 function check_if_turn_left($p, $q, $r){
     $matrix_result = matrix_calc($p, $q, $r);
-    if($matrix_result==0){
-//        echo"punkt leży na prostej";
+    if($matrix_result==0){//punkt na prostej
         return 0;
-    }else if($matrix_result>0){
-//        echo"punkt jest po lewej";
+    }else if($matrix_result>0){//punkt po lewej
         return 1;
-    }else if($matrix_result<0){
-//        echo"punkt jest po prawej";
+    }else if($matrix_result<0){//punkt po prawej
         return 0;
     }
     return 0;

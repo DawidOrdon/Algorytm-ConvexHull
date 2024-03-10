@@ -16,6 +16,7 @@ function import_from_file($file_name){
     });
     //usunięcie tych samych punktów
     $array = array_map("unserialize", array_unique(array_map("serialize", $array)));
-
+    //reindeksacja tablicy
+    $array = array_values($array);
     return $array;
 }
